@@ -32,6 +32,17 @@ struct ContentView: View {
                         Label("Add Item", systemImage: "plus")
                     }
                 }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        print("Migration Test")
+                        
+                        let migration_tool = LegacyDatabaseMigrationTool(modelContext: modelContext)
+                        migration_tool?.migrate()
+                    } label: {
+                        Label("Add Item", systemImage: "gear")
+                    }
+                }
             }
         }
     }

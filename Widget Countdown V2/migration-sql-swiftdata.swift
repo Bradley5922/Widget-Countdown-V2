@@ -15,8 +15,7 @@ import SwiftData
 class LegacyDatabaseMigrationTool {
     
     // SwiftData new persistent storage usage
-    @Environment(\.modelContext) private var modelContext
-    @Query private var events: [Event]
+    private var modelContext: ModelContext
     
     // legacy database information
     private var db_connection: Connection!
@@ -30,7 +29,11 @@ class LegacyDatabaseMigrationTool {
     let _legacy_color2_column = Expression<String>("color2")
     let _legacy_bgIMG_column = Expression<String>("bgIMG")
     
-    init?() {
+    init?(modelContext: ModelContext) {
+        
+        // Model context has to be passed from a view
+        self.modelContext = modelContext
+        
         logger.debug("Database migration tool initialising...")
         
         self._legacy_db_path = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.widgetShareData.countdown")!.absoluteString
@@ -112,3 +115,4 @@ class LegacyDatabaseMigrationTool {
     }
  
 }
+
