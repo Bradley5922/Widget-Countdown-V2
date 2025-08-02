@@ -17,6 +17,9 @@ struct ContentView: View {
             List {
                 ForEach(events) { event in
                     Text(event.name)
+                        .background(
+                            event.background.gradient
+                        )
                 }
                 .onDelete(perform: deleteItems)
             }
@@ -24,12 +27,19 @@ struct ContentView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         print("Add Button Clicked")
+                        tempEventsCreation()
                     } label: {
                         Label("Add Item", systemImage: "plus")
                     }
                 }
             }
         }
+    }
+    
+    private func tempEventsCreation() {
+        let fake_event = Event(name: "Allison", gradient_colors: [.pink, .purple])
+        
+        modelContext.insert(fake_event)
     }
 
     private func deleteItems(offsets: IndexSet) {

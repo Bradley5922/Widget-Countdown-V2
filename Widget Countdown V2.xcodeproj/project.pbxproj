@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		02E87E712E3E4A31004ABCC4 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 02E87E702E3E4A31004ABCC4 /* SQLite */; };
+		02E87E742E3E4D44004ABCC4 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 02E87E732E3E4D44004ABCC4 /* Logging */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		02A4498C2E3E445900C20261 /* Widget Countdown V2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Widget Countdown V2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02E87E742E3E4D44004ABCC4 /* Logging in Frameworks */,
+				02E87E712E3E4A31004ABCC4 /* SQLite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +85,8 @@
 			);
 			name = "Widget Countdown V2";
 			packageProductDependencies = (
+				02E87E702E3E4A31004ABCC4 /* SQLite */,
+				02E87E732E3E4D44004ABCC4 /* Logging */,
 			);
 			productName = "Widget Countdown V2";
 			productReference = 02A4498C2E3E445900C20261 /* Widget Countdown V2.app */;
@@ -107,6 +116,10 @@
 			);
 			mainGroup = 02A449832E3E445900C20261;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				02E87E6F2E3E4A31004ABCC4 /* XCRemoteSwiftPackageReference "SQLite.swift" */,
+				02E87E722E3E4D44004ABCC4 /* XCRemoteSwiftPackageReference "swift-log" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 02A4498D2E3E445900C20261 /* Products */;
 			projectDirPath = "";
@@ -361,6 +374,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		02E87E6F2E3E4A31004ABCC4 /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.15.4;
+			};
+		};
+		02E87E722E3E4D44004ABCC4 /* XCRemoteSwiftPackageReference "swift-log" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-log";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		02E87E702E3E4A31004ABCC4 /* SQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02E87E6F2E3E4A31004ABCC4 /* XCRemoteSwiftPackageReference "SQLite.swift" */;
+			productName = SQLite;
+		};
+		02E87E732E3E4D44004ABCC4 /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02E87E722E3E4D44004ABCC4 /* XCRemoteSwiftPackageReference "swift-log" */;
+			productName = Logging;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 02A449842E3E445900C20261 /* Project object */;
 }
