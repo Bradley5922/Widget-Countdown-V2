@@ -15,6 +15,7 @@ import UIKit
 class Event {
     
     var timestamp: Date
+    var createdAt: Date
     var name: String
     var background: Background
     
@@ -22,16 +23,38 @@ class Event {
         timestamp: Date = .now,
         name: String,
         image: Data? = nil,
-        gradient_colors: [Color]
+        gradient_colors: [Color],
+        createdAt: Date = .now
     ) {
         
         self.timestamp = timestamp
+        self.createdAt = createdAt
         self.name = name
         
         self.background = Background(
             image: image,
             gradient_colors: gradient_colors
         )
+    }
+    
+    static func makeTestEvent() -> Event {
+        // Generate timestamp: between 1 week and 5 months from now (5 months = ~150 days)
+        let secondsInDay: TimeInterval = 24 * 60 * 60
+        let oneWeek: TimeInterval = secondsInDay * 7
+        let fiveMonths: TimeInterval = secondsInDay * 150
+        let randomFutureInterval = TimeInterval.random(in: oneWeek...fiveMonths)
+        let timestamp = Date().addingTimeInterval(randomFutureInterval)
+
+        // Generate createdAt: between 1 week and 1 month ago
+        let oneMonth: TimeInterval = secondsInDay * 30
+        let randomPastInterval = TimeInterval.random(in: oneWeek...oneMonth)
+        let createdAt = Date().addingTimeInterval(-randomPastInterval)
+
+        // Generate two distinct random colours
+        let presetColors: [Color] = [.red, .blue, .green, .orange, .purple, .pink, .yellow, .teal, .indigo]
+        let randomColors = Array(presetColors.shuffled().prefix(2))
+
+        return Event(timestamp: timestamp, name: "Event Name", image: nil, gradient_colors: randomColors, createdAt: createdAt)
     }
     
 }
@@ -56,13 +79,21 @@ class Background {
     
     // MARK: Gradient Stuff
     
-    var colorA_red: Double
-    var colorA_green: Double
-    var colorA_blue: Double
+    // Has to be computed values as not for it to assume it needs to be stored
+    var colorA: Color {
+        return Color(red: colorA_red, green: colorA_green, blue: colorA_blue)
+    }
+    var colorB: Color {
+        return Color(red: colorB_red, green: colorB_green, blue: colorB_blue)
+    }
     
-    var colorB_red: Double
-    var colorB_green: Double
-    var colorB_blue: Double
+    private var colorA_red: Double
+    private var colorA_green: Double
+    private var colorA_blue: Double
+    
+    private var colorB_red: Double
+    private var colorB_green: Double
+    private var colorB_blue: Double
     
     var gradient: LinearGradient {
         let colorA = Color(red: colorA_red, green: colorA_green, blue: colorA_blue)
@@ -96,21 +127,6 @@ class Background {
         self.colorB_red = colorB_components.r
         self.colorB_green = colorB_components.g
         self.colorB_blue = colorB_components.b
-    }
-}
-
-extension Color {
-
-    var components: (r: Double, g: Double, b: Double, a: Double) {
-        
-        var r: CGFloat = 0
-        var g: CGFloat = 0
-        var b: CGFloat = 0
-        var a: CGFloat = 0
-        
-        guard UIColor(self).getRed(&r, green: &g, blue: &b, alpha: &a) else { return (0,0,0,0) }
-        
-        return (Double(r), Double(g), Double(b), Double(a))
     }
 }
 
